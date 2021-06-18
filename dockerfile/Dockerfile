@@ -36,7 +36,7 @@ RUN chmod +x /opt/python_install/bin/python
 RUN cp /opt/python_install/bin/python /bin/python
 
 RUN wget https://bootstrap.pypa.io/get-pip.py
-RUN python get-pip.py --user
+RUN python get-pip.py
 # RUN python -m pip install --no-cache-dir -r /tmp/requirements.txt
 
 # azkaban
