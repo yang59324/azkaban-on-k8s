@@ -20,6 +20,8 @@ RUN set -eux; \
 	; \
 	rm -rf /var/lib/apt/lists/*
 
+COPY . /tmp/
+
 # make and install python
 RUN mkdir -p /opt/python_install
 WORKDIR /opt/python_install
@@ -33,9 +35,11 @@ RUN make install
 RUN chmod +x /opt/python_install/bin/python
 RUN cp /opt/python_install/bin/python /bin/python
 
-# azkaban
-COPY . /tmp/
+RUN wget https://bootstrap.pypa.io/get-pip.py
+RUN python get-pip.py --user
+# RUN python -m pip install --no-cache-dir -r /tmp/requirements.txt
 
+# azkaban
 RUN mkdir -p /opt/azkaban \
  && tar zxf /tmp/azkaban-exec-server-3.84.4.tar.gz -C /opt/azkaban/ \
  && ln -s /opt/azkaban/azkaban-exec-server-3.84.4 /opt/azkaban/azkaban-exec \
