@@ -24,9 +24,9 @@ RUN set -eux; \
 RUN mkdir -p /opt/python_install
 WORKDIR /opt/python_install
 
-RUN wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz
-RUN tar -zxvf Python-2.7.18.tgz
-RUN cd Python-2.7.18
+RUN wget https://www.python.org/ftp/python/3.6.13/Python-3.6.13.tgz
+RUN tar -zxvf Python-3.6.13.tgz
+RUN cd Python-3.6.13
 RUN ./configure --prefix=/opt/python_install --enable-optimizations
 RUN make
 RUN make install
