@@ -13,9 +13,27 @@ RUN set -eux; \
 		procps \
         vim \
 		mariadb-client \
+		# python installation required
+		gcc \
+		libc6-dev \
+		make \
 	; \
 	rm -rf /var/lib/apt/lists/*
 
+# make and install python
+RUN mkdir -p /opt/python_install
+WORKDIR /opt/python_install
+
+RUN wget https://www.python.org/ftp/python/2.7.18/Python-2.7.18.tgz
+RUN tar -zxvf Python-2.7.18.tgz
+RUN cd Python-2.7.18
+RUN ./configure --prefix=/opt/python_install --enable-optimizations
+RUN make
+RUN make install
+RUN chmod +x /opt/python_install/bin/python
+RUN cp /opt/python_install/bin/python /bin/python
+
+# azkaban
 COPY . /tmp/
 
 RUN mkdir -p /opt/azkaban \
