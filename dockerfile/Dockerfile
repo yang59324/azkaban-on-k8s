@@ -17,6 +17,7 @@ RUN set -eux; \
 		gcc \
 		libc6-dev \
 		make \
+		# zlib is must required
 		zlib1g-dev libffi-dev libssl-dev \
 	; \
 	rm -rf /var/lib/apt/lists/*
@@ -26,7 +27,7 @@ COPY . /tmp/
 # make and install python
 RUN mkdir -p /opt/python_install
 WORKDIR /opt/python_install
-
+COPY Python-3.6.13.tgz /opt/python_install/
 RUN tar -zxvf Python-3.6.13.tgz &&\
     cd Python-3.6.13 &&\
     ./configure --prefix=/opt/python_install &&\
