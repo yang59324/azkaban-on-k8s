@@ -17,6 +17,7 @@ RUN set -eux; \
 		gcc \
 		libc6-dev \
 		make \
+		zlib1g-dev libffi-dev libssl-dev \
 	; \
 	rm -rf /var/lib/apt/lists/*
 
@@ -26,18 +27,17 @@ COPY . /tmp/
 RUN mkdir -p /opt/python_install
 WORKDIR /opt/python_install
 
-RUN wget https://www.python.org/ftp/python/3.6.13/Python-3.6.13.tgz
-RUN tar -zxvf Python-3.6.13.tgz
-RUN cd Python-3.6.13
-RUN ./configure --prefix=/opt/python_install --enable-optimizations
-RUN make
-RUN make install
-RUN chmod +x /opt/python_install/bin/python
-RUN cp /opt/python_install/bin/python /bin/python
+RUN tar -zxvf Python-3.6.13.tgz &&\
+    cd Python-3.6.13 &&\
+    ./configure --prefix=/opt/python_install &&\
+    make &&\
+    make install &&\
+    chmod +x /opt/python_install/bin/python3.6 &&\
+    cp /opt/python_install/bin/python3.6 /bin/python
 
 RUN wget https://bootstrap.pypa.io/get-pip.py
 RUN python get-pip.py
-# RUN python -m pip install --no-cache-dir -r /tmp/requirements.txt
+RUN python -m pip install --no-cache-dir -r /tmp/requirements.txt
 
 # azkaban
 RUN mkdir -p /opt/azkaban \
