@@ -41,6 +41,7 @@ kubectl exec azkaban-mysql-xxxxx-xxxx -n azkaban -it -- mysql -uroot -pmypasswor
 kubectl apply -f exe-cm.yaml 
 ```
 - 创建exe节点
+- 修改yaml文件中image和imagePullPolicy
 ```
 kubectl apply -f exe.yaml 
 ```
@@ -63,6 +64,7 @@ kubectl -n azkaban exec pod/azkaban-mysql-6f9b69c478-xlhpt -- mysql -uazkaban -p
 kubectl apply -f web-cm.yaml 
 ```
 - 创建web节点
+- 修改yaml文件中image和imagePullPolicy
 ```
 kubectl apply -f web.yaml 
 ```
