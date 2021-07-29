@@ -5,9 +5,9 @@
 ```
 cd dockerfile
 
-docker build -t localhost:32000/azkaban:t3 .
+docker build -t localhost:32000/azkaban:t4 .
 
-docker push localhost:32000/azkaban:t3
+docker push localhost:32000/azkaban:t4
 ```
 
 ### 按需创建namespace
